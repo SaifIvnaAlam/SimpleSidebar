@@ -1,9 +1,7 @@
-library simple_sidebar;
-
 import 'package:flutter/material.dart';
-import 'package:simple_sidebar/interface/simple_sidebar_element.dart';
 import 'package:simple_sidebar/simple_sidebar_item.dart';
 import 'package:simple_sidebar/simple_sidebar_theme.dart';
+import 'package:simple_sidebar/interface/simple_sidebar_element.dart';
 
 class SimpleSidebaro extends StatefulWidget {
   /// onTapped Callback
@@ -13,10 +11,10 @@ class SimpleSidebaro extends StatefulWidget {
   final ValueChanged<bool> toggleSidebar;
 
   /// The items of the sidebar
-  final List<SimpleSidebarElement> sidebarItems;
+  final List<Widget> sidebarItems;
 
   /// The footer items of the sidebar
-  final List<SimpleSidebarElement>? sidebarFooterItems;
+  final List<Widget>? sidebarFooterItems;
 
   /// The title image (like app icon)
   final Widget? titleImage;
@@ -146,7 +144,7 @@ class _SimpleSidebarStateo extends State<SimpleSidebaro> {
                 shrinkWrap: true,
                 itemCount: widget.sidebarItems.length,
                 itemBuilder: (BuildContext context, int index) {
-                  SimpleSidebarElement element = widget.sidebarItems[index];
+                  Widget element = widget.sidebarItems[index];
                   return listTileElement(element as SimpleSidebarItem, index);
                 },
               ),
@@ -161,8 +159,7 @@ class _SimpleSidebarStateo extends State<SimpleSidebaro> {
                   shrinkWrap: true,
                   itemCount: widget.sidebarFooterItems!.length,
                   itemBuilder: (BuildContext context, int index) {
-                    SimpleSidebarElement element =
-                        widget.sidebarFooterItems![index];
+                    Widget element = widget.sidebarFooterItems![index];
                     return listTileElement(element as SimpleSidebarItem, index);
                   },
                 ),
@@ -228,7 +225,8 @@ class _SimpleSidebarStateo extends State<SimpleSidebaro> {
                 ? widget.simpleSidebarTheme?.selectedTextStyle
                 : widget.simpleSidebarTheme?.unselectedTextStyle,
             overflow: item.textOverflow ?? TextOverflow.fade,
-            softWrap: item.wrapWord ?? false,),
+            softWrap: item.wrapWord ?? false,
+          ),
           onTap: () {
             widget.onTapped(index);
             setState(() {
